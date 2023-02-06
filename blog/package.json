@@ -57,7 +57,7 @@
     "lint-staged": "^11.0.0",
     "next-remote-watch": "^1.0.0",
     "prettier": "^2.5.1",
-    "prettier-plugin-tailwindcss": "^0.1.4",
+    "prettier-plugin-tailwindcss": "^0.1.4"
   },
   "lint-staged": {
     "*.+(js|jsx|ts|tsx)": [
