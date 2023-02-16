@@ -311,7 +311,7 @@ export default function Blog({ blogPost }) {
                   <b>Both the Pacific and Atlantic oceans can be crossed in a yacht</b>. You can
                   cross the Pacific and Atlantic oceans on a sailing yacht or a motor yacht. … Some
                   yachts will not hold enough fuel to complete the trip and will typically be
-                  shipped on freighters designed for this.
+                  shipped on freighters designed.
                 </span>
               </div>
             </div>
