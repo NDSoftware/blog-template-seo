@@ -100,6 +100,7 @@ inquirer
     },
   ])
   .then((answers) => {
+    console.log('ti', answers)
     // Remove special characters and replace space with -
     const fileName = answers.title
       .toLowerCase()

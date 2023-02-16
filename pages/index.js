@@ -1,21 +1,23 @@
 import { PageSEO } from '@/components/SEO'
 import siteMetadata from '@/data/siteMetadata'
-import { getAllFilesFrontMatter } from '@/lib/mdx'
 import { BlogHome } from '@/components/blog/blog-home'
-
-const MAX_DISPLAY = 5
+import axios from 'axios'
 
 export async function getStaticProps() {
-  const posts = await getAllFilesFrontMatter('blog')
-
-  return { props: { posts } }
+  try {
+    const response = await axios.get('https://hypertest.rishvi.app/api/blogs/get-blog-lists')
+    const posts = response.data.data
+    return { props: { posts } }
+  } catch (error) {
+    return {}
+  }
 }
 
 export default function Home({ posts }) {
   return (
     <>
       <PageSEO title={siteMetadata.title} description={siteMetadata.description} />
-      <BlogHome />
+      <BlogHome posts={posts} />
     </>
   )
 }

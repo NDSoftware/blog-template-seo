@@ -306,3 +306,23 @@ input:focus {
 .text-base {
     font-size: 16px;
 }
+
+/*
+Blog Detail*/
+.blog-head {
+    background-color: #fff;
+    box-shadow: 0 5px 15px 0 #eee
+}
+
+.bg-blog-title {
+    background-color:#FFFEB7;
+}
+.bg-reported-link {
+    color:#dc3545
+}
+.bg-like {
+    color:#146c43
+}
+.bg-dislike {
+    color:#dc3545
+}
