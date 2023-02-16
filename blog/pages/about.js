@@ -13,9 +13,9 @@ export default function About({ authorDetails }) {
 
   return (
     <MDXLayoutRenderer
-        layout={frontMatter.layout || DEFAULT_LAYOUT}
-        mdxSource={mdxSource}
-        frontMatter={frontMatter}
+      layout={frontMatter.layout || DEFAULT_LAYOUT}
+      mdxSource={mdxSource}
+      frontMatter={frontMatter}
     />
   )
 }

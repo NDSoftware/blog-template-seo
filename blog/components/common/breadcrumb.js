@@ -1,14 +1,16 @@
-import Link from "@/components/Link";
+import Link from '@/components/Link'
 
-export const Breadcrumb = ({pathName, iconName}) => {
-    return (
-        <>
-            <div className="d-flex flex-column flex-md-row- justify-content-between">
-                <div className="opacity-75 pb-2 fs13 bcrmb">
-                    <Link href="/"><i class="fa"></i></Link>
-                    <span class="category-name">{pathName}</span>
-                </div>
-            </div>
-        </>
-    )
+export const Breadcrumb = ({ pathName, iconName }) => {
+  return (
+    <>
+      <div className="d-flex flex-column flex-md-row- justify-content-between">
+        <div className="fs13 bcrmb pb-2 opacity-75">
+          <Link href="/">
+            <i className="fa"></i>
+          </Link>
+          <span className="category-name">{pathName}</span>
+        </div>
+      </div>
+    </>
+  )
 }

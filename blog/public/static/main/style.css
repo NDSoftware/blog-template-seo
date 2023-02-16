@@ -267,7 +267,7 @@ input:focus {
 }
 
 .loader {
-    background: url(../assets/images/loader.gif);
+    background: url(../images/loader.gif);
     float: none;
     margin: 0;
     width: 16px;
