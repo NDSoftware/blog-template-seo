@@ -19,14 +19,9 @@ class MyDocument extends Document {
           />
           <link rel="manifest" href="/static/favicons/site.webmanifest" />
           <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
-          {/*<link rel="stylesheet" href="/static/main/all.css" type="text/css" />*/}
           <script src="/static/js/jquery.min.js" async />
-          {/*<link href="/static/main/bootstrap.min.css" rel="stylesheet" />*/}
           <script src="/static/js/bootstrap.bundle.min.js" async />
           <script src="/static/js/alertify.min.js" async />
-          {/*<link rel="stylesheet" href="/static/main/alertify.min.css" />*/}
-          {/*<link rel="stylesheet" href="/static/main/default.min.css" />*/}
-          {/*<link rel="stylesheet" href="/static/main/style.css" />*/}
         </Head>
         <body>
           <Main />
