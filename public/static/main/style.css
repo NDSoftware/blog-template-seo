@@ -326,3 +326,6 @@ Blog Detail*/
 .bg-dislike {
     color:#dc3545
 }
+.pointer {
+    cursor: pointer;
+}

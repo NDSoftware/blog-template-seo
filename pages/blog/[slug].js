@@ -7,7 +7,6 @@ export async function getStaticPaths() {
       slug: p.slug,
     },
   }))
-  console.log('oath', posts)
   return {
     paths: posts,
     fallback: false,
@@ -37,7 +36,7 @@ export default function Blog({ blogPost }) {
               <Link href="/" passHref>
                 <i className="fa fa-home"></i>
               </Link>
-              <Link href="/" passHref>
+              <Link href="/" passHref className="pointer">
                 <span className="category-name">Health</span>
               </Link>
             </div>
@@ -54,28 +53,9 @@ export default function Blog({ blogPost }) {
               <i className="fa fa-clock me-2"></i>9 months ago
             </span>
           </div>
-          <p className="mb-0 mt-2 text-base">
-            Find top links about {blogPost?.title} along with social links, FAQs, and more. If you
-            are still unable to resolve the login problem, read the troubleshooting steps or{' '}
-            <Link href="/" passHref>
-              <strong>report your issue</strong>
-            </Link>
-            .
-          </p>
-          <div className="row my-2 mt-sm-2 mb-sm-3">
-            <p className="col-12 col-sm-6 my-auto opacity-75">
-              <i className="fa fa-clock ps-0"></i>
-              {blogPost?.articleDate}
-            </p>
-            <div className="col-12 col-sm-6 mt-2 mt-sm-0"></div>
-          </div>
-          <div className="align-content-center fw-bold mb-2 mt-4 h5">
-            What problem are you having with blackoutrugby.com?
-          </div>
-          <div className="mt-2">
-            Select an option that best describe your problem. You can also post issue detail or ask
-            any query to get answer from site admin or community.
-          </div>
+          {blogPost?.content && <span dangerouslySetInnerHTML={{
+            __html: JSON.stringify(blogPost?.content, null, '\t')
+          }}/>}
           <br />
           {blogPost?.blogDetails.map((detail, index) => {
             return (
@@ -90,7 +70,7 @@ export default function Blog({ blogPost }) {
                       <div className="col-md-12">
                         <div className="opacity-50 fs14">
                           <span className="me-2 user-name" title="Critic">
-                            <i className="fa fa-user me-2"></i>Critic
+                            <i className="fa fa-user me-2"></i>{detail?.userName}
                           </span>
                           <span className="d-none d-sm-inline me-2 user-location">
                             <i className="fa fa-map-marker-alt me-2"></i>
@@ -115,124 +95,29 @@ export default function Blog({ blogPost }) {
                           </h2>
                           <div className="url">{detail?.contentLink}</div>
                         </div>
-                        <p className="card-text mb-0 mt-1">{detail?.content}</p>
+                        <p className="card-text mb-0 mt-1">
+                          {detail?.content && <span dangerouslySetInnerHTML={{
+                            __html: JSON.stringify(detail?.content, null, '\t')
+                          }}/>}
+                        </p>
                       </div>
                       <div className="col">
                         <div className="row">
                           <div className="col-lg-9">
-                            <h3>Social Media Links</h3>
-                            <span className="social-icon">
-                              <Link
-                                href="https://twitter.com/blackoutrugby"
-                                rel="nofollow"
-                                target="_blank"
-                                passHref
-                              >
-                                <NextImage
-                                  src="/public/static/images/icons/social-media/twitter.png"
-                                  layout="fill"
-                                />
-                              </Link>
-                            </span>
-                            <span className="social-icon">
-                              <Link
-                                href="https://www.facebook.com/BlackoutRugby/posts/10162211360290357?comment_id=10162211392755357"
-                                rel="nofollow"
-                                target="_blank"
-                                passHref
-                              >
-                                <NextImage
-                                  src="/public/static/images/icons/social-media/facebook.png"
-                                  layout="fill"
-                                />
-                              </Link>
-                            </span>
+                            {detail?.socialContent && <span dangerouslySetInnerHTML={{
+                              __html: JSON.stringify(detail?.socialContent, null, '\t')
+                            }}/>}
                           </div>
                           <div className="col-lg-3">
-                            <h3>Play Store Links</h3>
-                            <span className="social-icon">
-                              <Link
-                                href="https://twitter.com/blackoutrugby"
-                                rel="nofollow"
-                                target="_blank"
-                                passHref
-                              >
-                                <NextImage
-                                  src="/public/static/images/icons/social-media/twitter.png"
-                                  layout="fill"
-                                />
-                              </Link>
-                            </span>
-                            <span className="social-icon">
-                              <Link
-                                href="https://www.facebook.com/BlackoutRugby/posts/10162211360290357?comment_id=10162211392755357"
-                                rel="nofollow"
-                                target="_blank"
-                                passHref
-                              >
-                                <NextImage
-                                  src="/public/static/images/icons/social-media/facebook.png"
-                                  layout="fill"
-                                />
-                              </Link>
-                            </span>
+                            {detail?.applicationContent && <span dangerouslySetInnerHTML={{
+                              __html: JSON.stringify(detail?.applicationContent, null, '\t')
+                            }}/>}
                           </div>
                         </div>
                         <div className="mt-4 mb-2 site-links">
-                          <h3>Official Pages Links</h3>
-                          <div className="row">
-                            <div className="col-lg-6">
-                              <i className="fa fa-external-link-square-alt"></i>
-                              <Link
-                                href="https://www.blackoutrugby.com/game/global.clubrooms.php"
-                                rel="nofollow"
-                                target="_blank"
-                                title="Clubrooms"
-                                passHref
-                              >
-                                Clubrooms
-                              </Link>
-                            </div>
-                            <div className="col-lg-6">
-                              <i className="fa fa-external-link-square-alt"></i>
-                              <Link href="/about" rel="nofollow" target="_blank" title="About Us">
-                                About Us
-                              </Link>
-                            </div>
-                            <div className="col-lg-6">
-                              <i className="fa fa-external-link-square-alt"></i>
-                              <Link
-                                href="https://www.blackoutrugby.com/game/global.market.php"
-                                rel="nofollow"
-                                target="_blank"
-                                title="Transfer Market"
-                              >
-                                Transfer Market
-                              </Link>
-                            </div>
-                            <div className="col-lg-6">
-                              <i className="fa fa-external-link-square-alt"></i>
-                              <Link
-                                href="https://www.blackoutrugby.com/game/club.squad.php"
-                                rel="nofollow"
-                                target="_blank"
-                                title="Squad"
-                              >
-                                Squad
-                              </Link>
-                            </div>
-                            <div className="col-lg-6">
-                              <i className="fa fa-external-link-square-alt"></i>
-                              <Link
-                                href="https://www.blackoutrugby.com/"
-                                rel="nofollow"
-                                target="_blank"
-                                title={detail?.title}
-                              >
-                                {detail?.title}
-                              </Link>
-                            </div>
-                          </div>
+                          {detail?.officialPageContent && <span dangerouslySetInnerHTML={{
+                            __html: JSON.stringify(detail?.officialPageContent, null, '\t')
+                          }}/>}
                         </div>
                         <div className="d-flex flex-row justify-content-between pt-2">
                           <div className="d-flex flex-row opacity-75">
