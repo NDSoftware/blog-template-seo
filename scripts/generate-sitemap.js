@@ -24,6 +24,7 @@ const siteMetadata = require('../data/siteMetadata')
                     return
                   }
                 }
+                const regex = /[\]\[]/g
                 const path = page
                   .replace('pages/', '/')
                   .replace('public/', '/')
@@ -34,7 +35,10 @@ const siteMetadata = require('../data/siteMetadata')
                   .replace('/feed.xml', '')
                 const route = path === '/index' ? '' : path
 
-                if (page.search('pages/404.') > -1 || page.search(`pages/blog/[...slug].`) > -1) {
+                if (
+                  page.search('pages/404.') > -1 ||
+                  page.replace(regex, '').search(`pages/slug.`) > -1
+                ) {
                   return
                 }
                 return `

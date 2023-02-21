@@ -23,22 +23,30 @@ export async function getStaticProps({ params }) {
 }
 
 import Link from 'next/link'
-import NextImage from 'next/image'
+import { BlogNotFound } from '@/components/blog/BlogNotFound'
+import TOCInline from '@/components/TOCInline'
 
 export default function Blog({ blogPost }) {
+  if (!blogPost) {
+    return <BlogNotFound />
+  }
+
   return (
     <div className="container-xxl">
-      <div className="row flex-column flex-lg-row">
-        <div className="d-none col-lg-1 d-lg-flex"></div>
-        <div className="col-12 col-lg-8 p-3 p-lg-4 blog-head">
+      <div className="row flex-column flex-lg-row justify-content-center">
+        <div className="col-12 col-md-10 col-lg-10 p-3 p-lg-4 blog-head">
           <div className="d-flex flex-column flex-md-row- justify-content-between">
             <div className="opacity-75 pb-2 fs13 bcrmb">
               <Link href="/" passHref>
-                <i className="fa fa-home"></i>
+                <a className="pointer">
+                  <i className="fa fa-home"></i> Home
+                </a>
               </Link>
+              <span> >> </span>
               <Link href="/" passHref className="pointer">
-                <span className="category-name">Health</span>
+                <a className="category-name pointer">Portal</a>
               </Link>
+              <span className="category-name"> >> {blogPost?.title}</span>
             </div>
           </div>
           <h1>{blogPost?.title}</h1>
@@ -56,7 +64,7 @@ export default function Blog({ blogPost }) {
           {blogPost?.content && (
             <span
               dangerouslySetInnerHTML={{
-                __html: JSON.stringify(blogPost?.content, null, '\t'),
+                __html: blogPost?.content,
               }}
             />
           )}
@@ -88,14 +96,8 @@ export default function Blog({ blogPost }) {
                         </div>
                         <div className="my-2">
                           <h2>
-                            <Link
-                              title={detail?.title}
-                              href="/"
-                              passHref
-                              rel="nofollow"
-                              target="_blank"
-                            >
-                              <span className="bg-blog-title">{detail?.title}</span>
+                            <Link title={detail?.title} href={detail?.contentLink}>
+                              <a target="_blank">{detail?.title}</a>
                             </Link>
                           </h2>
                           <div className="url">{detail?.contentLink}</div>
@@ -104,7 +106,7 @@ export default function Blog({ blogPost }) {
                           {detail?.content && (
                             <span
                               dangerouslySetInnerHTML={{
-                                __html: JSON.stringify(detail?.content, null, '\t'),
+                                __html: detail?.content,
                               }}
                             />
                           )}
@@ -116,7 +118,7 @@ export default function Blog({ blogPost }) {
                             {detail?.socialContent && (
                               <span
                                 dangerouslySetInnerHTML={{
-                                  __html: JSON.stringify(detail?.socialContent, null, '\t'),
+                                  __html: detail?.socialContent,
                                 }}
                               />
                             )}
@@ -125,7 +127,7 @@ export default function Blog({ blogPost }) {
                             {detail?.applicationContent && (
                               <span
                                 dangerouslySetInnerHTML={{
-                                  __html: JSON.stringify(detail?.applicationContent, null, '\t'),
+                                  __html: detail?.applicationContent,
                                 }}
                               />
                             )}
@@ -135,12 +137,12 @@ export default function Blog({ blogPost }) {
                           {detail?.officialPageContent && (
                             <span
                               dangerouslySetInnerHTML={{
-                                __html: JSON.stringify(detail?.officialPageContent, null, '\t'),
+                                __html: detail?.officialPageContent,
                               }}
                             />
                           )}
                         </div>
-                        <div className="d-flex flex-row justify-content-between pt-2">
+                        {/*<div className="d-flex flex-row justify-content-between pt-2">
                           <div className="d-flex flex-row opacity-75">
                             <div className="text-center">
                               <Link href="/" title="I found it useful" passHref className="bg-like">
@@ -166,7 +168,7 @@ export default function Blog({ blogPost }) {
                               <i className="fa fa-flag"></i>
                             </Link>
                           </div>
-                        </div>
+                        </div>*/}
                       </div>
                     </div>
                   </div>
@@ -174,7 +176,7 @@ export default function Blog({ blogPost }) {
               </div>
             )
           })}
-          <div className=" card py-3">
+          {/*<div className=" card py-3">
             <div className="card-body faq p-md-3">
               <p>
                 If you know a webpage link that work for the reported issue. Consider sharing with
@@ -221,7 +223,7 @@ export default function Blog({ blogPost }) {
                 </span>
               </div>
             </div>
-          </div>
+          </div>*/}
         </div>
         {/*<div
             className="col-12 col-lg-3 d-lg-flex flex-lg-column">

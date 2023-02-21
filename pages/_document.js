@@ -17,8 +17,8 @@ class MyDocument extends Document {
             sizes="16x16"
             href="/static/favicons/favicon-16x16.png"
           />
+          <link rel="manifest" href="/site.webmanifest" key="site-manifest" />
           <link rel="manifest" href="/static/favicons/site.webmanifest" />
-          <link rel="alternate" type="application/rss+xml" href="/feed.xml" />
           <script src="/static/js/jquery.min.js" async />
           <script src="/static/js/bootstrap.bundle.min.js" async />
           <script src="/static/js/alertify.min.js" async />

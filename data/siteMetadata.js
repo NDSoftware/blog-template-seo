@@ -2,10 +2,10 @@ const siteMetadata = {
   title: 'Blog',
   author: 'Dhairya Bhavsar',
   headerTitle: 'Blog',
-  description: 'A blog created with Next.js and Tailwind.css',
+  description: 'A blog created',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: '',
+  siteUrl: 'https://blog-template-seo.vercel.app',
   siteRepo: '',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',

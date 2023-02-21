@@ -15,7 +15,7 @@ export const BlogHome = ({ posts }) => {
                   posts.map((blog, index) => (
                     <div className="col-lg-6 cat-row" key={'blog_' + index}>
                       <div className="cat-txt">
-                        <Link href={'/blog/' + blog.slug}>{blog.title}</Link>
+                        <Link href={'/' + blog.slug}>{blog.title}</Link>
                       </div>
                     </div>
                   ))}
