@@ -53,9 +53,13 @@ export default function Blog({ blogPost }) {
               <i className="fa fa-clock me-2"></i>9 months ago
             </span>
           </div>
-          {blogPost?.content && <span dangerouslySetInnerHTML={{
-            __html: JSON.stringify(blogPost?.content, null, '\t')
-          }}/>}
+          {blogPost?.content && (
+            <span
+              dangerouslySetInnerHTML={{
+                __html: JSON.stringify(blogPost?.content, null, '\t'),
+              }}
+            />
+          )}
           <br />
           {blogPost?.blogDetails.map((detail, index) => {
             return (
@@ -70,7 +74,8 @@ export default function Blog({ blogPost }) {
                       <div className="col-md-12">
                         <div className="opacity-50 fs14">
                           <span className="me-2 user-name" title="Critic">
-                            <i className="fa fa-user me-2"></i>{detail?.userName}
+                            <i className="fa fa-user me-2"></i>
+                            {detail?.userName}
                           </span>
                           <span className="d-none d-sm-inline me-2 user-location">
                             <i className="fa fa-map-marker-alt me-2"></i>
@@ -96,28 +101,44 @@ export default function Blog({ blogPost }) {
                           <div className="url">{detail?.contentLink}</div>
                         </div>
                         <p className="card-text mb-0 mt-1">
-                          {detail?.content && <span dangerouslySetInnerHTML={{
-                            __html: JSON.stringify(detail?.content, null, '\t')
-                          }}/>}
+                          {detail?.content && (
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: JSON.stringify(detail?.content, null, '\t'),
+                              }}
+                            />
+                          )}
                         </p>
                       </div>
                       <div className="col">
                         <div className="row">
                           <div className="col-lg-9">
-                            {detail?.socialContent && <span dangerouslySetInnerHTML={{
-                              __html: JSON.stringify(detail?.socialContent, null, '\t')
-                            }}/>}
+                            {detail?.socialContent && (
+                              <span
+                                dangerouslySetInnerHTML={{
+                                  __html: JSON.stringify(detail?.socialContent, null, '\t'),
+                                }}
+                              />
+                            )}
                           </div>
                           <div className="col-lg-3">
-                            {detail?.applicationContent && <span dangerouslySetInnerHTML={{
-                              __html: JSON.stringify(detail?.applicationContent, null, '\t')
-                            }}/>}
+                            {detail?.applicationContent && (
+                              <span
+                                dangerouslySetInnerHTML={{
+                                  __html: JSON.stringify(detail?.applicationContent, null, '\t'),
+                                }}
+                              />
+                            )}
                           </div>
                         </div>
                         <div className="mt-4 mb-2 site-links">
-                          {detail?.officialPageContent && <span dangerouslySetInnerHTML={{
-                            __html: JSON.stringify(detail?.officialPageContent, null, '\t')
-                          }}/>}
+                          {detail?.officialPageContent && (
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: JSON.stringify(detail?.officialPageContent, null, '\t'),
+                              }}
+                            />
+                          )}
                         </div>
                         <div className="d-flex flex-row justify-content-between pt-2">
                           <div className="d-flex flex-row opacity-75">
@@ -161,7 +182,7 @@ export default function Blog({ blogPost }) {
                 information, it would be get listed on this web page.
               </p>
               <div className="text-center">
-                <Link className="mt-1 btn btn-primary" href="/" rel="nofollow">
+                <Link className="mt-1 btn btn-primary" href="/" passHref rel="nofollow">
                   Add New Link
                 </Link>
               </div>
@@ -202,6 +223,184 @@ export default function Blog({ blogPost }) {
             </div>
           </div>
         </div>
+        {/*<div
+            className="col-12 col-lg-3 d-lg-flex flex-lg-column">
+          <div>
+            <h4 className="ps-3 mt-3 fw-bold"><i
+                className="fas fa-tools pe-2"></i>Troubleshooting
+            </h4>
+            <div className="px-3 py-3 bg-white">
+              <div className="fw-bold mb-2">Before login,
+                must ensure following:
+              </div>
+              <ul className="p-0 m-0 ps-3">
+                <li>Keyboard CAPS lock is OFF</li>
+                <li>You are not using an old password</li>
+                <li>Your given email/login-name is valid</li>
+                <li>Its not a phishing website</li>
+                <li>Do not use VPN as some sites restrict VPN</li>
+                <li>The internet connection is active and login form is loading cache</li>
+                <li>If the site requires captcha, it
+                  must be valid. Regenerate if its
+                  not readable
+                </li>
+                <li>Still not resolved? Visit
+                  <Link href="/faq" passHref className="pointer">FAQs page</Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <h5 className="ps-3 mt-3"><i
+              className="fa fa-copy pe-2"></i>Similar</h5>
+          <div className="list-group list-group-flush">
+            <Link href="/" passHref
+               className="list-group-item list-group-item-action d-flex py-3 pointer"
+               aria-current="true">
+              <div
+                  className="w-100 justify-content-between d-flex">
+                <div>
+                  <h6 className="mb-0">Project Blackout Login</h6>
+                </div>
+              </div>
+            </Link>
+            <Link href="/" passHref
+               className="list-group-item list-group-item-action d-flex py-3"
+               aria-current="true">
+              <div
+                  className="w-100 justify-content-between d-flex">
+                <div>
+                  <h6 className="mb-0">Usa Rugby Login</h6>
+                </div>
+              </div>
+            </Link>
+            <Link href="/" passHref
+               className="list-group-item list-group-item-action d-flex py-3"
+               aria-current="true">
+              <div
+                  className="w-100 justify-content-between d-flex">
+                <div>
+                  <h6 className="mb-0">Udt Super Rugby
+                    Login</h6>
+                </div>
+              </div>
+            </Link>
+            <Link href="/" passHref
+               className="list-group-item list-group-item-action d-flex py-3"
+               aria-current="true">
+              <div
+                  className="w-100 justify-content-between d-flex">
+                <div>
+                  <h6 className="mb-0">The Rugby Site Login</h6>
+                </div>
+              </div>
+            </Link>
+            <Link href="/" passHref
+               className="list-group-item list-group-item-action d-flex py-3"
+               aria-current="true">
+              <div
+                  className="w-100 justify-content-between d-flex">
+                <div>
+                  <h6 className="mb-0">Gloucester Rugby Login</h6>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <h5 className="mt-3">
+            <Link href="/" passHref><i
+              className="fa fa-th-list"></i>Most Discussed
+            </Link>
+          </h5>
+          <div className="list-group list-group-flush">
+            <Link href="/" passHref
+               className="col-md-6 list-group-item list-group-item-action d-flex gap-3 py-3"
+               aria-current="true">
+              <div
+                  className="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                  <h6 className="mb-1">Rapido Login
+                  </h6>
+                  <div className="opacity-75 mt-2 recentPost">
+                          <span className="totalView">
+                            <i
+                              className="fa fa-eye"
+                              title="Total Views"></i><span
+                              className="views-count">1,392
+                                  Views </span></span>
+                    <span className="bg-rating">
+                      <i className="fa fa-star ms-2"
+                        title="Rating"></i>
+                        <span
+                            className="average-rating">5</span>
+                    </span>
+                    <span className=".bg-lastView"><i
+                        className="fa fa-clock ms-2"
+                        title="Last Viewed"></i>
+                      <span
+                          className="last-viewed">24
+                          minutes
+                          ago
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+            <Link href="/" passHref
+               className="col-md-6 list-group-item list-group-item-action d-flex gap-3 py-3"
+               aria-current="true">
+              <div
+                  className="d-flex gap-2 w-100 justify-content-between">
+                <div>
+                  <h6 className="mb-1">Cloud Tv Login
+                  </h6>
+                  <div className="opacity-75 mt-2 recentPost">
+                    <span className="totalView"><i
+                        className="fa fa-eye"
+                        title="Total Views"></i><span
+                        className="views-count">974
+                            Views </span></span>
+                    <span className="bg-rating">
+                      <i className="fa fa-star ms-2" title="Rating"></i>
+                      <span className="average-rating">4</span></span>
+                    <span className="bg-lastView"><i
+                        className="fa fa-clock ms-2"
+                        title="Last Viewed"></i>
+                      <span
+                          className="last-viewed">41
+                          minutes
+                          ago</span></span>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </div>
+          <h5 className="mt-3">
+            <Link href="/" passHref>
+              <i className="fa fa-edit pointer"></i>Recently Updated
+            </Link>
+          </h5>
+          <div className="list-group list-group-flush">
+            <Link href="/" passHref
+               className="list-group-item list-group-item-action d-flex gap-3 py-3 pointer"
+               aria-current="true">
+              <div className="w-100">
+                <h6 className="mb-1">Outside Agents
+                  Login</h6>
+                <div className="d-flex w-100 ">
+                  <span
+                      className="opacity-75 d-inline-block pt-1">
+                  </span>
+                  <small
+                      className="opacity-75 text-nowrap align-self-center pt-2"><i
+                      className="fa fa-clock"></i><span
+                      className="updated-date">1
+                                                                                                minute
+                                                                                                ago</span></small>
+                </div>
+              </div>
+            </Link>
+          </div>
+        </div>*/}
       </div>
     </div>
   )

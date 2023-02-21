@@ -329,3 +329,16 @@ Blog Detail*/
 .pointer {
     cursor: pointer;
 }
+.recentPost {
+    font-size: 12px;
+    font-weight: normal;
+}
+.totalView {
+    color:#cf7721
+}
+.bg-rating {
+    color:#13653f
+}
+.bg-lastView {
+    color:#0a53be
+}
