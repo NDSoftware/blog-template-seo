@@ -13,6 +13,7 @@ import Link from 'next/link'
 import { BlogNotFound } from '@/components/blog/BlogNotFound'
 import TOCInline from '@/components/TOCInline'
 import { BlogSEO } from '@/components/SEO'
+import { getBreadcrumbs } from '@/components/blog/getBreadcrumbs'
 
 export default function Blog({ blogPost }) {
   if (!blogPost) {
@@ -28,6 +29,8 @@ export default function Blog({ blogPost }) {
 
   const authorDetails = blogPost?.blogDetails.map((blog) => blog?.userName)
 
+  const breadcrumb = getBreadcrumbs({ title: blogPost?.slug })
+
   return (
     <>
       <BlogSEO
@@ -35,6 +38,7 @@ export default function Blog({ blogPost }) {
         date={blogPost?.articleDate}
         authorDetails={authorDetails}
         summary={blogPost?.metaDescription}
+        breadcrumbData={breadcrumb}
       />
       <div className="container-xxl">
         <div className="row flex-column flex-lg-row justify-content-center">

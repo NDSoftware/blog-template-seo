@@ -13,6 +13,10 @@ Allow: /*static
 Disallow: /search
 Disallow: /*filter=
 Disallow: /*enable-cookies
+Disallow: /faq
+Disallow: /privacy-policy
+Disallow: /disclaimer
+Disallow: /terms-of-service
 
 Sitemap: https://blog-template-seo.vercel.app/sitemap.xml
 `

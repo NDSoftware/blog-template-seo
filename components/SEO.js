@@ -1,9 +1,24 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import siteMetadata from '@/data/siteMetadata'
+import { getBreadcrumbs } from '@/components/blog/getBreadcrumbs'
 
-const CommonSEO = ({ title, description }) => {
+const CommonSEO = ({ title, description, breadcrumbData }) => {
   const router = useRouter()
+  const breadcrumb = () => {
+    return (
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(
+            breadcrumbData ? breadcrumbData : getBreadcrumbs({ title: null }),
+            null,
+            '\t'
+          ),
+        }}
+      />
+    )
+  }
   return (
     <Head>
       <title>{title}</title>
@@ -19,12 +34,13 @@ const CommonSEO = ({ title, description }) => {
       {/*<meta name="twitter:description" content={description} />*/}
       {/*<meta name="twitter:image" content={twImage} />*/}
       <link rel="canonical" href={`${siteMetadata.siteUrl}${router.asPath}`} />
+      {breadcrumb()}
     </Head>
   )
 }
 
-export const PageSEO = ({ title, description }) => {
-  return <CommonSEO title={title} description={description} />
+export const PageSEO = ({ title, description, breadcrumb }) => {
+  return <CommonSEO title={title} description={description} breadcrumbData={breadcrumb} />
 }
 
 export const BlogSEO = ({
@@ -36,6 +52,7 @@ export const BlogSEO = ({
   url,
   images = [],
   canonicalUrl,
+  breadcrumbData,
 }) => {
   const router = useRouter()
   const publishedAt = new Date(date).toISOString()
@@ -108,6 +125,7 @@ export const BlogSEO = ({
         ogImage={featuredImages}
         twImage={twImageUrl}
         canonicalUrl={canonicalUrl}
+        breadcrumbData={breadcrumbData}
       />
       <Head>
         {date && <meta property="article:published_time" content={publishedAt} />}

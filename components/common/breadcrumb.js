@@ -5,10 +5,16 @@ export const Breadcrumb = ({ pathName, iconName }) => {
     <>
       <div className="d-flex flex-column flex-md-row- justify-content-between">
         <div className="fs13 bcrmb pb-2 opacity-75">
-          <Link href="/">
-            <i className="fa"></i>
+          <Link href="/" passHref>
+            <a className="pointer">
+              <i className="fa fa-home"></i> Home
+            </a>
           </Link>
-          <span className="category-name">{pathName}</span>
+          <span> >> </span>
+          <Link href="/" passHref>
+            <a className="category-name pointer">Portal</a>
+          </Link>
+          <span className="category-name"> >> {pathName}</span>
         </div>
       </div>
     </>
