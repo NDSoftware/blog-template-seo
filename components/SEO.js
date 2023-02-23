@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import siteMetadata from '@/data/siteMetadata'
 
-const CommonSEO = ({ title, description, ogType, ogImage, twImage, canonicalUrl }) => {
+const CommonSEO = ({ title, description }) => {
   const router = useRouter()
   return (
     <Head>
@@ -10,40 +10,21 @@ const CommonSEO = ({ title, description, ogType, ogImage, twImage, canonicalUrl 
       <meta name="robots" content="follow, index" />
       <meta name="description" content={description} />
       <meta property="og:url" content={`${siteMetadata.siteUrl}${router.asPath}`} />
-      <meta property="og:type" content={ogType} />
       <meta property="og:site_name" content={siteMetadata.title} />
       <meta property="og:description" content={description} />
       <meta property="og:title" content={title} />
-      {ogImage.constructor.name === 'Array' ? (
-        ogImage.map(({ url }) => <meta property="og:image" content={url} key={url} />)
-      ) : (
-        <meta property="og:image" content={ogImage} key={ogImage} />
-      )}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content={siteMetadata.twitter} />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={twImage} />
-      <link
-        rel="canonical"
-        href={canonicalUrl ? canonicalUrl : `${siteMetadata.siteUrl}${router.asPath}`}
-      />
+      {/*<meta name="twitter:card" content="summary_large_image" />*/}
+      {/*<meta name="twitter:site" content={siteMetadata.twitter} />*/}
+      {/*<meta name="twitter:title" content={title} />*/}
+      {/*<meta name="twitter:description" content={description} />*/}
+      {/*<meta name="twitter:image" content={twImage} />*/}
+      <link rel="canonical" href={`${siteMetadata.siteUrl}${router.asPath}`} />
     </Head>
   )
 }
 
 export const PageSEO = ({ title, description }) => {
-  const ogImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
-  const twImageUrl = siteMetadata.siteUrl + siteMetadata.socialBanner
-  return (
-    <CommonSEO
-      title={title}
-      description={description}
-      ogType="website"
-      ogImage={ogImageUrl}
-      twImage={twImageUrl}
-    />
-  )
+  return <CommonSEO title={title} description={description} />
 }
 
 export const BlogSEO = ({
@@ -73,12 +54,16 @@ export const BlogSEO = ({
     }
   })
 
+  const removeDuplicates = (arr) => {
+    return arr.filter((item, index) => arr.indexOf(item) === index)
+  }
+
   let authorList
   if (authorDetails) {
-    authorList = authorDetails.map((author) => {
+    authorList = removeDuplicates(authorDetails).map((author) => {
       return {
         '@type': 'Person',
-        name: author.name,
+        name: author,
       }
     })
   } else {
@@ -90,10 +75,10 @@ export const BlogSEO = ({
 
   const structuredData = {
     '@context': 'https://schema.org',
-    '@type': 'Article',
+    '@type': 'BlogPosting',
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id': url,
+      '@id': `${siteMetadata.siteUrl}${router.asPath}`,
     },
     headline: title,
     image: featuredImages,
@@ -103,6 +88,7 @@ export const BlogSEO = ({
     publisher: {
       '@type': 'Organization',
       name: siteMetadata.author,
+      url: siteMetadata.siteUrl,
       logo: {
         '@type': 'ImageObject',
         url: `${siteMetadata.siteUrl}${siteMetadata.siteLogo}`,

@@ -1,19 +1,6 @@
 import axios from 'axios'
 
-export async function getStaticPaths() {
-  const response = await axios.get('https://hypertest.rishvi.app/api/blogs/get-blog-lists')
-  const posts = response.data.data.map((p) => ({
-    params: {
-      slug: p.slug,
-    },
-  }))
-  return {
-    paths: posts,
-    fallback: false,
-  }
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const response = await axios.get(
     'https://hypertest.rishvi.app/api/blogs/get-blog-detail/' + params.slug
   )
@@ -25,124 +12,141 @@ export async function getStaticProps({ params }) {
 import Link from 'next/link'
 import { BlogNotFound } from '@/components/blog/BlogNotFound'
 import TOCInline from '@/components/TOCInline'
+import { BlogSEO } from '@/components/SEO'
 
 export default function Blog({ blogPost }) {
   if (!blogPost) {
     return <BlogNotFound />
   }
 
+  const toc = blogPost?.blogDetails.map((blog) => {
+    return {
+      value: blog.domain,
+      url: blog.domain,
+    }
+  })
+
+  const authorDetails = blogPost?.blogDetails.map((blog) => blog?.userName)
+
   return (
-    <div className="container-xxl">
-      <div className="row flex-column flex-lg-row justify-content-center">
-        <div className="col-12 col-md-10 col-lg-10 p-3 p-lg-4 blog-head">
-          <div className="d-flex flex-column flex-md-row- justify-content-between">
-            <div className="opacity-75 pb-2 fs13 bcrmb">
-              <Link href="/" passHref>
-                <a className="pointer">
-                  <i className="fa fa-home"></i> Home
-                </a>
-              </Link>
-              <span> >> </span>
-              <Link href="/" passHref className="pointer">
-                <a className="category-name pointer">Portal</a>
-              </Link>
-              <span className="category-name"> >> {blogPost?.title}</span>
+    <>
+      <BlogSEO
+        title={blogPost?.title}
+        date={blogPost?.articleDate}
+        authorDetails={authorDetails}
+        summary={blogPost?.metaDescription}
+      />
+      <div className="container-xxl">
+        <div className="row flex-column flex-lg-row justify-content-center">
+          <div className="col-12 col-md-10 col-lg-10 p-3 p-lg-4 blog-head">
+            <div className="d-flex flex-column flex-md-row- justify-content-between">
+              <div className="opacity-75 pb-2 fs13 bcrmb">
+                <Link href="/" passHref>
+                  <a className="pointer">
+                    <i className="fa fa-home"></i> Home
+                  </a>
+                </Link>
+                <span> >> </span>
+                <Link href="/" passHref className="pointer">
+                  <a className="category-name pointer">Portal</a>
+                </Link>
+                <span className="category-name"> >> {blogPost?.title}</span>
+              </div>
             </div>
-          </div>
-          <h1>{blogPost?.title}</h1>
-          <div className="opacity-75 py-2 fs13">
-            <span className="me-2 badge bg-success opacity-100 d-sm-inline">
-              <i className="fa fa-user"></i>Reviewer
-            </span>
-            <span className="d-md-inline user-location">
-              <i className="fa fa-map-marker-alt"></i>West Des Moines, IA
-            </span>
-            <span className="published-date">
-              <i className="fa fa-clock me-2"></i>9 months ago
-            </span>
-          </div>
-          {blogPost?.content && (
-            <span
-              dangerouslySetInnerHTML={{
-                __html: blogPost?.content,
-              }}
-            />
-          )}
-          <br />
-          {blogPost?.blogDetails.map((detail, index) => {
-            return (
-              <div className="result" id={detail?.id} key={'blog_Detail_' + index}>
-                <div className="pr-dm">
-                  <span>{index + 1 + '. '}</span>
-                  <span>{detail?.domain}</span>
-                </div>
-                <div className="card sr">
-                  <div className="card-body">
-                    <div className="row">
-                      <div className="col-md-12">
-                        <div className="opacity-50 fs14">
-                          <span className="me-2 user-name" title="Critic">
-                            <i className="fa fa-user me-2"></i>
-                            {detail?.userName}
-                          </span>
-                          <span className="d-none d-sm-inline me-2 user-location">
-                            <i className="fa fa-map-marker-alt me-2"></i>
-                            {detail?.location}
-                          </span>
-                          <span className="published-date">
-                            <i className="fa fa-clock me-2"></i>
-                            {detail?.articleTime}
-                          </span>
-                        </div>
-                        <div className="my-2">
-                          <h2>
-                            <Link title={detail?.title} href={detail?.contentLink}>
-                              <a target="_blank">{detail?.title}</a>
-                            </Link>
-                          </h2>
-                          <div className="url">{detail?.contentLink}</div>
-                        </div>
-                        <p className="card-text mb-0 mt-1">
-                          {detail?.content && (
-                            <span
-                              dangerouslySetInnerHTML={{
-                                __html: detail?.content,
-                              }}
-                            />
-                          )}
-                        </p>
-                      </div>
-                      <div className="col">
-                        <div className="row">
-                          <div className="col-lg-9">
-                            {detail?.socialContent && (
+            <h1>{blogPost?.title}</h1>
+            <div className="opacity-75 py-2 fs13">
+              <span className="me-2 badge bg-success opacity-100 d-sm-inline">
+                <i className="fa fa-user"></i>Reviewer
+              </span>
+              <span className="d-md-inline user-location">
+                <i className="fa fa-map-marker-alt"></i>West Des Moines, IA
+              </span>
+              <span className="published-date ms-2">
+                <i className="fa fa-clock me-2"></i>9 months ago
+              </span>
+            </div>
+            {blogPost?.content && (
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: blogPost?.content,
+                }}
+              />
+            )}
+            <TOCInline toc={toc} />
+            {blogPost?.blogDetails.map((detail, index) => {
+              return (
+                <div className="result" id={detail?.id} key={'blog_Detail_' + index}>
+                  <div className="pr-dm">
+                    <span>{index + 1 + '. '}</span>
+                    <span id={detail?.domain}>{detail?.domain}</span>
+                  </div>
+                  <div className="card sr">
+                    <div className="card-body">
+                      <div className="row">
+                        <div className="col-md-12">
+                          <div className="opacity-50 fs14">
+                            <span className="me-2 user-name" title="Critic">
+                              <i className="fa fa-user me-2"></i>
+                              {detail?.userName}
+                            </span>
+                            <span className="d-none d-sm-inline me-2 user-location">
+                              <i className="fa fa-map-marker-alt me-2"></i>
+                              {detail?.location}
+                            </span>
+                            <span className="published-date">
+                              <i className="fa fa-clock me-2"></i>
+                              {detail?.articleTime}
+                            </span>
+                          </div>
+                          <div className="my-2">
+                            <h2>
+                              <Link title={detail?.title} href={detail?.contentLink}>
+                                <a target="_blank">{detail?.title}</a>
+                              </Link>
+                            </h2>
+                            <div className="url">{detail?.contentLink}</div>
+                          </div>
+                          <p className="card-text mb-0 mt-1">
+                            {detail?.content && (
                               <span
                                 dangerouslySetInnerHTML={{
-                                  __html: detail?.socialContent,
+                                  __html: detail?.content,
+                                }}
+                              />
+                            )}
+                          </p>
+                        </div>
+                        <div className="col">
+                          <div className="row">
+                            <div className="col-lg-9">
+                              {detail?.socialContent && (
+                                <span
+                                  dangerouslySetInnerHTML={{
+                                    __html: detail?.socialContent,
+                                  }}
+                                />
+                              )}
+                            </div>
+                            <div className="col-lg-3">
+                              {detail?.applicationContent && (
+                                <span
+                                  dangerouslySetInnerHTML={{
+                                    __html: detail?.applicationContent,
+                                  }}
+                                />
+                              )}
+                            </div>
+                          </div>
+                          <div className="mt-4 mb-2 site-links">
+                            {detail?.officialPageContent && (
+                              <span
+                                dangerouslySetInnerHTML={{
+                                  __html: detail?.officialPageContent,
                                 }}
                               />
                             )}
                           </div>
-                          <div className="col-lg-3">
-                            {detail?.applicationContent && (
-                              <span
-                                dangerouslySetInnerHTML={{
-                                  __html: detail?.applicationContent,
-                                }}
-                              />
-                            )}
-                          </div>
-                        </div>
-                        <div className="mt-4 mb-2 site-links">
-                          {detail?.officialPageContent && (
-                            <span
-                              dangerouslySetInnerHTML={{
-                                __html: detail?.officialPageContent,
-                              }}
-                            />
-                          )}
-                        </div>
-                        {/*<div className="d-flex flex-row justify-content-between pt-2">
+                          {/*<div className="d-flex flex-row justify-content-between pt-2">
                           <div className="d-flex flex-row opacity-75">
                             <div className="text-center">
                               <Link href="/" title="I found it useful" passHref className="bg-like">
@@ -169,14 +173,14 @@ export default function Blog({ blogPost }) {
                             </Link>
                           </div>
                         </div>*/}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )
-          })}
-          {/*<div className=" card py-3">
+              )
+            })}
+            {/*<div className=" card py-3">
             <div className="card-body faq p-md-3">
               <p>
                 If you know a webpage link that work for the reported issue. Consider sharing with
@@ -224,8 +228,8 @@ export default function Blog({ blogPost }) {
               </div>
             </div>
           </div>*/}
-        </div>
-        {/*<div
+          </div>
+          {/*<div
             className="col-12 col-lg-3 d-lg-flex flex-lg-column">
           <div>
             <h4 className="ps-3 mt-3 fw-bold"><i
@@ -403,7 +407,8 @@ export default function Blog({ blogPost }) {
             </Link>
           </div>
         </div>*/}
+        </div>
       </div>
-    </div>
+    </>
   )
 }

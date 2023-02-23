@@ -1,8 +1,8 @@
 const siteMetadata = {
-  title: 'Blog',
+  title: 'Custom Blog Site',
   author: 'Dhairya Bhavsar',
   headerTitle: 'Blog',
-  description: 'A blog created',
+  description: 'Find the official link to Onlinewagestatements Login. Explore troubleshooting, and users feedback about onlinewagestatements.com.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://blog-template-seo.vercel.app',
