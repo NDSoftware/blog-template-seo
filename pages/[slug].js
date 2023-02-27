@@ -22,8 +22,8 @@ export default function Blog({ blogPost }) {
 
   const toc = blogPost?.blogDetails.map((blog) => {
     return {
-      value: blog.domain,
-      url: blog.domain,
+      value: blog.title,
+      url: blog.title,
     }
   })
 
@@ -82,7 +82,7 @@ export default function Blog({ blogPost }) {
                 <div className="result" id={detail?.id} key={'blog_Detail_' + index}>
                   <div className="pr-dm">
                     <span>{index + 1 + '. '}</span>
-                    <span id={detail?.domain}>{detail?.domain}</span>
+                    <span id={detail?.title}>{detail?.domain}</span>
                   </div>
                   <div className="card sr">
                     <div className="card-body">
