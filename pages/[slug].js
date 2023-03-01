@@ -14,8 +14,10 @@ import { BlogNotFound } from '@/components/blog/BlogNotFound'
 import TOCInline from '@/components/TOCInline'
 import { BlogSEO } from '@/components/SEO'
 import { getBreadcrumbs } from '@/components/blog/getBreadcrumbs'
+import { useDisqus } from '@/components/disqus'
 
 export default function Blog({ blogPost }) {
+  const disqus = useDisqus()
   if (!blogPost) {
     return <BlogNotFound />
   }
@@ -60,13 +62,13 @@ export default function Blog({ blogPost }) {
             <h1>{blogPost?.title}</h1>
             <div className="opacity-75 py-2 fs13">
               <span className="me-2 badge bg-success opacity-100 d-sm-inline">
-                <i className="fa fa-user"></i>Reviewer
+                <i className="fa fa-user"></i> {blogPost?.userName}
               </span>
               <span className="d-md-inline user-location">
-                <i className="fa fa-map-marker-alt"></i>West Des Moines, IA
+                <i className="fa fa-map-marker-alt"></i> {blogPost?.location}
               </span>
               <span className="published-date ms-2">
-                <i className="fa fa-clock me-2"></i>9 months ago
+                <i className="fa fa-clock me-2"></i> {blogPost?.articleTime}
               </span>
             </div>
             {blogPost?.content && (
@@ -105,10 +107,12 @@ export default function Blog({ blogPost }) {
                           <div className="my-2">
                             <h2>
                               <Link title={detail?.title} href={detail?.contentLink}>
-                                <a target="_blank">{detail?.title}</a>
+                                <a className="bg-blog-list-title" target="_blank">
+                                  {detail?.title}
+                                </a>
                               </Link>
                             </h2>
-                            <div className="url">{detail?.contentLink}</div>
+                            <div className="url text-truncate">{detail?.contentLink}</div>
                           </div>
                           <p className="card-text mb-0 mt-1">
                             {detail?.content && (
@@ -232,6 +236,14 @@ export default function Blog({ blogPost }) {
               </div>
             </div>
           </div>*/}
+            {blogPost?.postContent && (
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: blogPost?.postContent,
+                }}
+              />
+            )}
+            {disqus}
           </div>
           {/*<div
             className="col-12 col-lg-3 d-lg-flex flex-lg-column">

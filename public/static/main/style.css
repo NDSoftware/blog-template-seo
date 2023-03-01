@@ -356,3 +356,11 @@ Blog Detail*/
     text-decoration: underline;
     font-weight: 500;
 }
+
+.bg-blog-list-title {
+    color: #14b8a6;
+}
+
+.site-links a {
+    color: #14b8a6;
+}
