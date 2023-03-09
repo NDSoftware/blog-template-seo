@@ -3,7 +3,6 @@ import { countries } from '../config/countries'
 import axios from 'axios'
 import { CONFIGURL } from '../config/constant'
 import { useRef, useState } from 'react'
-import { preventNonNumericalInput } from '../config/util'
 
 export async function getStaticProps() {
   return { props: { countryList: countries } }
