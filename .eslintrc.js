@@ -14,4 +14,7 @@ module.exports = {
     'no-unused-vars': 0,
     'react/no-unescaped-entities': 0,
   },
+  globals: {
+    "bootstrap": "readonly"
+  }
 }

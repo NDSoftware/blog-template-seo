@@ -364,3 +364,7 @@ Blog Detail*/
 .site-links a {
     color: #14b8a6;
 }
+
+.required {
+    color: red;
+}

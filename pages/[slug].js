@@ -3,7 +3,7 @@ import { BlogNotFound } from '@/components/blog/BlogNotFound'
 import TOCInline from '@/components/TOCInline'
 import { BlogSEO } from '@/components/SEO'
 import { getBreadcrumbs } from '@/components/blog/getBreadcrumbs'
-import { useDisqus } from '@/components/disqus'
+// import { useDisqus } from '@/components/disqus'
 import { CONFIGURL } from '../config/constant'
 import { BlogBreadcrumb } from '@/components/common'
 import { BlogTocList } from '@/components/blog'
@@ -16,7 +16,7 @@ export async function getServerSideProps({ params }) {
 }
 
 export default function Blog({ blogPost }) {
-  const disqus = useDisqus()
+  // const disqus = useDisqus()
   if (!blogPost) {
     return <BlogNotFound />
   }
@@ -121,7 +121,7 @@ export default function Blog({ blogPost }) {
                 }}
               />
             )}
-            {disqus}
+            {/*{disqus}*/}
           </div>
           {/*<div
             className="col-12 col-lg-3 d-lg-flex flex-lg-column">
