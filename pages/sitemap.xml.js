@@ -1,7 +1,8 @@
 import axios from 'axios'
+import { CONFIGURL } from '../config/constant'
 
-const EXTERNAL_DATA_URL = 'https://hypertest.rishvi.app/api/blogs/get-blog-lists'
-const siteUrl = 'https://blog-template-seo.vercel.app/'
+const EXTERNAL_DATA_URL = CONFIGURL.blogList
+const siteUrl = process.env.SITE_URL
 
 function generateSiteMap(posts) {
   return `<?xml version="1.0" encoding="UTF-8"?>

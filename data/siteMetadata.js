@@ -1,11 +1,11 @@
 const siteMetadata = {
   title: 'Custom Blog Site',
   author: 'Dhairya Bhavsar',
-  headerTitle: 'Blog',
+  headerTitle: 'Login Hyper',
   description: 'Find the official link to Onlinewagestatements Login. Explore troubleshooting, and users feedback about onlinewagestatements.com.',
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://blog-template-seo.vercel.app',
+  siteUrl: 'https://loginhyper.com',
   siteRepo: '',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',

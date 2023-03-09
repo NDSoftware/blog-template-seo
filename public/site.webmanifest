@@ -9,7 +9,7 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "/favicons/android-chrome-96x96.png",
+      "src": "/static/favicons/android-chrome-96x96.png",
       "type": "image/png",
       "sizes": "192x192"
     },

@@ -1,20 +1,19 @@
 import axios from 'axios'
-
-export async function getServerSideProps({ params }) {
-  const response = await axios.get(
-    'https://hypertest.rishvi.app/api/blogs/get-blog-detail/' + params.slug
-  )
-  const post = response.data.data
-
-  return { props: { blogPost: post } }
-}
-
-import Link from 'next/link'
 import { BlogNotFound } from '@/components/blog/BlogNotFound'
 import TOCInline from '@/components/TOCInline'
 import { BlogSEO } from '@/components/SEO'
 import { getBreadcrumbs } from '@/components/blog/getBreadcrumbs'
 import { useDisqus } from '@/components/disqus'
+import { BlogBreadcrumb } from '@/components/common/blog-breadcrumb'
+import BlogTocList from '@/components/blog/blog-toc-list'
+import { CONFIGURL } from '../config/constant'
+
+export async function getServerSideProps({ params }) {
+  const response = await axios.get(CONFIGURL.blogDetails + params.slug)
+  const post = response.data.data
+
+  return { props: { blogPost: post } }
+}
 
 export default function Blog({ blogPost }) {
   const disqus = useDisqus()
@@ -45,20 +44,7 @@ export default function Blog({ blogPost }) {
       <div className="container-xxl">
         <div className="row flex-column flex-lg-row justify-content-center">
           <div className="col-12 col-md-10 col-lg-10 p-3 p-lg-4 blog-head">
-            <div className="d-flex flex-column flex-md-row- justify-content-between">
-              <div className="opacity-75 pb-2 fs13 bcrmb">
-                <Link href="/" passHref>
-                  <a className="pointer">
-                    <i className="fa fa-home"></i> Home
-                  </a>
-                </Link>
-                <span> >> </span>
-                <Link href="/" passHref className="pointer">
-                  <a className="category-name pointer">Portal</a>
-                </Link>
-                <span className="category-name"> >> {blogPost?.title}</span>
-              </div>
-            </div>
+            <BlogBreadcrumb title={blogPost?.title} />
             <h1>{blogPost?.title}</h1>
             <div className="opacity-75 py-2 fs13">
               <span className="me-2 badge bg-success opacity-100 d-sm-inline">
@@ -79,115 +65,7 @@ export default function Blog({ blogPost }) {
               />
             )}
             <TOCInline toc={toc} />
-            {blogPost?.blogDetails.map((detail, index) => {
-              return (
-                <div className="result" id={detail?.id} key={'blog_Detail_' + index}>
-                  <div className="pr-dm">
-                    <span>{index + 1 + '. '}</span>
-                    <span id={detail?.title}>{detail?.domain}</span>
-                  </div>
-                  <div className="card sr">
-                    <div className="card-body">
-                      <div className="row">
-                        <div className="col-md-12">
-                          <div className="opacity-50 fs14">
-                            <span className="me-2 user-name" title="Critic">
-                              <i className="fa fa-user me-2"></i>
-                              {detail?.userName}
-                            </span>
-                            <span className="d-none d-sm-inline me-2 user-location">
-                              <i className="fa fa-map-marker-alt me-2"></i>
-                              {detail?.location}
-                            </span>
-                            <span className="published-date">
-                              <i className="fa fa-clock me-2"></i>
-                              {detail?.articleTime}
-                            </span>
-                          </div>
-                          <div className="my-2">
-                            <h2>
-                              <Link title={detail?.title} href={detail?.contentLink}>
-                                <a className="bg-blog-list-title" target="_blank">
-                                  {detail?.title}
-                                </a>
-                              </Link>
-                            </h2>
-                            <div className="url text-truncate">{detail?.contentLink}</div>
-                          </div>
-                          <p className="card-text mb-0 mt-1">
-                            {detail?.content && (
-                              <span
-                                dangerouslySetInnerHTML={{
-                                  __html: detail?.content,
-                                }}
-                              />
-                            )}
-                          </p>
-                        </div>
-                        <div className="col">
-                          <div className="row">
-                            <div className="col-lg-9">
-                              {detail?.socialContent && (
-                                <span
-                                  dangerouslySetInnerHTML={{
-                                    __html: detail?.socialContent,
-                                  }}
-                                />
-                              )}
-                            </div>
-                            <div className="col-lg-3">
-                              {detail?.applicationContent && (
-                                <span
-                                  dangerouslySetInnerHTML={{
-                                    __html: detail?.applicationContent,
-                                  }}
-                                />
-                              )}
-                            </div>
-                          </div>
-                          <div className="mt-4 mb-2 site-links">
-                            {detail?.officialPageContent && (
-                              <span
-                                dangerouslySetInnerHTML={{
-                                  __html: detail?.officialPageContent,
-                                }}
-                              />
-                            )}
-                          </div>
-                          {/*<div className="d-flex flex-row justify-content-between pt-2">
-                          <div className="d-flex flex-row opacity-75">
-                            <div className="text-center">
-                              <Link href="/" title="I found it useful" passHref className="bg-like">
-                                <i className="fa fa-thumbs-up me-2"></i>
-                              </Link>
-                              <span className="thumbs-up-count">1</span>
-                            </div>
-                            <div className="text-center ps-3">
-                              <Link href="/" title="Its not useful" passHref className="bg-dislike">
-                                <i className="fa fa-thumbs-down me-2"></i>
-                              </Link>
-                              <span className="thumbs-down-count">0</span>
-                            </div>
-                          </div>
-                          <div className="d-flex flex-row opacity-75">
-                            <Link
-                              title="Report Link"
-                              className="bg-reported-link"
-                              href="/"
-                              rel="nofollow"
-                              passHref
-                            >
-                              <i className="fa fa-flag"></i>
-                            </Link>
-                          </div>
-                        </div>*/}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
+            <BlogTocList blogDetails={blogPost?.blogDetails} />
             {/*<div className=" card py-3">
             <div className="card-body faq p-md-3">
               <p>
