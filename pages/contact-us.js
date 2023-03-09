@@ -3,7 +3,7 @@ import { countries } from '../config/countries'
 import axios from 'axios'
 import { CONFIGURL } from '../config/constant'
 import { useRef, useState } from 'react'
-import {preventNonNumericalInput} from "../config/util";
+import { preventNonNumericalInput } from '../config/util'
 
 export async function getStaticProps() {
   return { props: { countryList: countries } }
@@ -124,7 +124,8 @@ export default function ContactUs({ countryList }) {
               </div>
               <div className="col-12">
                 <button type="submit" disabled={loading} className="btn btn-primary">
-                  Submit {loading && <span className="spinner-border spinner-border-sm" role="status"/>}
+                  Submit{' '}
+                  {loading && <span className="spinner-border spinner-border-sm" role="status" />}
                 </button>
               </div>
             </div>
