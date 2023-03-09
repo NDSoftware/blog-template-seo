@@ -3,6 +3,7 @@ import { countries } from '../config/countries'
 import axios from 'axios'
 import { CONFIGURL } from '../config/constant'
 import { useRef, useState } from 'react'
+import {preventNonNumericalInput} from "../config/util";
 
 export async function getStaticProps() {
   return { props: { countryList: countries } }
@@ -11,6 +12,7 @@ export async function getStaticProps() {
 export default function ContactUs({ countryList }) {
   const toastRef = useRef()
   const [message, setMessage] = useState('')
+  const [loading, setLoading] = useState(false)
 
   const showToast = () => {
     const toast = new bootstrap.Toast(toastRef.current)
@@ -29,11 +31,14 @@ export default function ContactUs({ countryList }) {
     formEl.classList.add('was-validated')
     if (formEl.checkValidity()) {
       const formData = new FormData(formEl)
+      setLoading(true)
       const response = await axios.post(CONFIGURL.contactForm, Object.fromEntries(formData))
       if (!response) {
+        setLoading(false)
         return
       }
       setMessage(response.data?.message)
+      setLoading(false)
       formSuccess(formEl)
     }
   }
@@ -118,8 +123,8 @@ export default function ContactUs({ countryList }) {
                 />
               </div>
               <div className="col-12">
-                <button type="submit" className="btn btn-primary">
-                  Submit
+                <button type="submit" disabled={loading} className="btn btn-primary">
+                  Submit {loading && <span className="spinner-border spinner-border-sm" role="status"/>}
                 </button>
               </div>
             </div>
