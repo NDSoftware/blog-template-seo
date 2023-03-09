@@ -1,6 +1,7 @@
+import { memo } from 'react'
 import Link from 'next/link'
 
-export const BlogBreadcrumb = ({ title }) => {
+const BlogBreadcrumb = ({ title }) => {
   return (
     <div className="d-flex flex-column flex-md-row- justify-content-between">
       <div className="opacity-75 pb-2 fs13 bcrmb">
@@ -18,3 +19,5 @@ export const BlogBreadcrumb = ({ title }) => {
     </div>
   )
 }
+
+export default memo(BlogBreadcrumb)

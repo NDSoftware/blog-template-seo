@@ -4,9 +4,9 @@ import TOCInline from '@/components/TOCInline'
 import { BlogSEO } from '@/components/SEO'
 import { getBreadcrumbs } from '@/components/blog/getBreadcrumbs'
 import { useDisqus } from '@/components/disqus'
-import { BlogBreadcrumb } from '@/components/common/blog-breadcrumb'
-import BlogTocList from '@/components/blog/blog-toc-list'
 import { CONFIGURL } from '../config/constant'
+import { BlogBreadcrumb } from '@/components/common'
+import { BlogTocList } from '@/components/blog'
 
 export async function getServerSideProps({ params }) {
   const response = await axios.get(CONFIGURL.blogDetails + params.slug)
