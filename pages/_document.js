@@ -29,7 +29,6 @@ class MyDocument extends Document {
           <link rel="manifest" href="/static/favicons/site.webmanifest" />
           <script src="/static/js/jquery.min.js" async />
           <script src="/static/js/bootstrap.bundle.min.js" async />
-          <script src="/static/js/alertify.min.js" async />
         </Head>
         <body>
           <Main />

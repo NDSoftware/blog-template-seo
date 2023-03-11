@@ -1,8 +1,8 @@
 const siteMetadata = {
-  title: 'Custom Blog Site',
-  author: 'Dhairya Bhavsar',
+  title: 'Login Hyper - Login Page Directory',
+  author: 'Login Hyper',
   headerTitle: 'Login Hyper',
-  description: 'Find the official link to Onlinewagestatements Login. Explore troubleshooting, and users feedback about onlinewagestatements.com.',
+  description: 'Find the top similar links and their troubleshooting guide.',
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://loginhyper.com',
