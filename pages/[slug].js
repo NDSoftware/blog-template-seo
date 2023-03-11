@@ -6,7 +6,7 @@ import { getBreadcrumbs } from '@/components/blog/getBreadcrumbs'
 // import { useDisqus } from '@/components/disqus'
 import { CONFIGURL } from '../config/constant'
 import { BlogBreadcrumb } from '@/components/common'
-import {BlogComment, BlogTocList} from '@/components/blog'
+import { BlogComment, BlogTocList } from '@/components/blog'
 
 export async function getServerSideProps({ params }) {
   const response = await axios.get(CONFIGURL.blogDetails + params.slug)
