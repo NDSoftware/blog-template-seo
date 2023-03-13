@@ -28,7 +28,7 @@ const BlogComment = () => {
   }
   return (
     <form className="needs-validation position-relative" onSubmit={formSubmit} noValidate>
-      <div className="row">
+      <div className="row pt-2">
         <div className="col-md-12 pb-2">
           <h2 className="border-bottom pb-2">Add Comment</h2>
         </div>

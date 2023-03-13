@@ -32,7 +32,7 @@ const BlogTocList = ({ blogDetails }) => {
                     <div className="my-2">
                       <h2>
                         <Link title={detail?.title} href={detail?.contentLink}>
-                          <a className="bg-blog-list-title" rel="noopener" target="_blank">
+                          <a className="bg-blog-list-title" rel="noopener nofollow" target="_blank">
                             {detail?.title}
                           </a>
                         </Link>
@@ -51,24 +51,20 @@ const BlogTocList = ({ blogDetails }) => {
                   </div>
                   <div className="col">
                     <div className="row">
-                      <div className="col-lg-9">
-                        {detail?.socialContent && (
-                          <span
-                            dangerouslySetInnerHTML={{
-                              __html: detail?.socialContent,
-                            }}
-                          />
-                        )}
-                      </div>
-                      <div className="col-lg-3">
-                        {detail?.applicationContent && (
-                          <span
-                            dangerouslySetInnerHTML={{
-                              __html: detail?.applicationContent,
-                            }}
-                          />
-                        )}
-                      </div>
+                      {detail?.socialContent && (
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: detail?.socialContent,
+                          }}
+                        />
+                      )}
+                      {detail?.applicationContent && (
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: detail?.applicationContent,
+                          }}
+                        />
+                      )}
                     </div>
                     <div className="mt-4 mb-2 site-links">
                       {detail?.officialPageContent && (
