@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { CONFIGURL } from '../config/constant'
 
-const EXTERNAL_DATA_URL = CONFIGURL.blogList
+const EXTERNAL_DATA_URL = CONFIGURL.sitemapList
 const siteUrl = process.env.SITE_URL
 
 function generateSiteMap(posts) {

@@ -4,7 +4,7 @@ export const BlogHome = ({ posts }) => {
   return (
     <>
       <div className="px-2 text-center">
-        <h1 className="display-5 fw-bold">Blogs</h1>
+        <h1 className="display-5 fw-bold">Login Hyper</h1>
       </div>
       <div className="container">
         <div className="row">

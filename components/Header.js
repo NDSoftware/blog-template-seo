@@ -6,7 +6,7 @@ export default function Header() {
       <nav className="navbar navbar-expand-lg navbar-light border-bottom bg-white shadow-sm">
         <div className="container-xxl z-50 bg-white">
           <Link href="/" className="navbar-brand">
-            <span className="fw-bold ps-1">Blog</span>
+            <span className="fw-bold ps-1">Login Hyper</span>
           </Link>
           <button
             type="button"
