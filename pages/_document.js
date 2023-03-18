@@ -11,6 +11,10 @@ class MyDocument extends Document {
           <meta name="format-detection" content="telephone=yes" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="theme-color" content="#ffffff" />
+          <meta
+            name="google-site-verification"
+            content="YN-xCcgFpRsisVsH956u596YNHCqPz7RmH4vRK2PoQc"
+          />
           <link rel="apple-touch-icon" sizes="76x76" href="/static/images/icons/app-store.png" />
           <link
             rel="icon"

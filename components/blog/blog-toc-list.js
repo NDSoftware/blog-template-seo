@@ -1,7 +1,21 @@
-import { memo } from 'react'
+import { memo, useEffect } from 'react'
 import Link from 'next/link'
 
 const BlogTocList = ({ blogDetails }) => {
+  useEffect(() => {
+    if (blogDetails && blogDetails.length !== 0) {
+      blogDetails.forEach((e, index) => {
+        const el = document.getElementById('row_' + index)
+        if (el && e.socialContent) {
+          el.innerHTML += e.socialContent
+        }
+        if (el && e.applicationContent) {
+          el.innerHTML += e.applicationContent
+        }
+      })
+    }
+  }, [blogDetails])
+
   return (
     <>
       {blogDetails?.map((detail, index) => {
@@ -50,22 +64,7 @@ const BlogTocList = ({ blogDetails }) => {
                     </p>
                   </div>
                   <div className="col">
-                    <div className="row">
-                      {detail?.socialContent && (
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: detail?.socialContent,
-                          }}
-                        />
-                      )}
-                      {detail?.applicationContent && (
-                        <span
-                          dangerouslySetInnerHTML={{
-                            __html: detail?.applicationContent,
-                          }}
-                        />
-                      )}
-                    </div>
+                    <div className="row pt-1" id={`row_${index}`} />
                     <div className="mt-4 mb-2 site-links">
                       {detail?.officialPageContent && (
                         <span
