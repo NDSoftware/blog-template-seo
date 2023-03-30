@@ -9,7 +9,7 @@ const chalk = require('chalk')
 const chokidar = require('chokidar')
 const program = require('commander')
 const http = require('http')
-const SocketIO = require('socket.io')
+// const SocketIO = require('socket.io')
 const express = require('express')
 const spawn = require('child_process').spawn
 const next = require('next')
@@ -45,7 +45,7 @@ app.prepare().then(() => {
       .watch(program.args, { usePolling: Boolean(program.polling) })
       .on(program.event, async (filePathContext, eventContext = defaultWatchEvent) => {
         // Emit changes via socketio
-        io.sockets.emit('reload', filePathContext)
+        // io.sockets.emit('reload', filePathContext)
         app.server.hotReloader.send('building')
 
         if (program.command) {
@@ -90,7 +90,7 @@ app.prepare().then(() => {
   const server = http.createServer(expressApp)
 
   // watch files with socketIO
-  const io = SocketIO(server)
+  // const io = SocketIO(server)
 
   // special handling for mdx reload route
   const reloadRoute = express.Router()

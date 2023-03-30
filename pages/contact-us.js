@@ -3,14 +3,19 @@ import { countries } from '../config/countries'
 import axios from 'axios'
 import { CONFIGURL } from '../config/constant'
 import { useRef, useState } from 'react'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 export async function getStaticProps() {
   return { props: { countryList: countries } }
 }
 
 export default function ContactUs({ countryList }) {
+  const GoogleCaptchaSiteKey = '6LfbhUUlAAAAAAJMZgB-d7JA6nepX_0Y6-K7MuHb'
+  const GoogleCaptchaSecretKey = '6LfbhUUlAAAAAIHawqacB0hdQmtZdeDdUuvlWaU2'
+  const captchaRef = useRef(null)
   const toastRef = useRef()
   const [message, setMessage] = useState('')
+  const [errorToast, setErrorToast] = useState(false)
   const [loading, setLoading] = useState(false)
 
   const showToast = () => {
@@ -19,6 +24,7 @@ export default function ContactUs({ countryList }) {
   }
 
   const formSuccess = (formEl) => {
+    setErrorToast(false)
     showToast()
     formEl.classList.remove('was-validated')
     formEl.reset()
@@ -28,6 +34,14 @@ export default function ContactUs({ countryList }) {
     e.preventDefault()
     const formEl = e.target
     formEl.classList.add('was-validated')
+    const token = captchaRef.current.getValue()
+
+    if (!captchaRef.current.getValue()) {
+      setErrorToast(true)
+      setMessage('Please verify you are not robot!!')
+      showToast()
+      return
+    }
     if (formEl.checkValidity()) {
       const formData = new FormData(formEl)
       setLoading(true)
@@ -36,6 +50,7 @@ export default function ContactUs({ countryList }) {
         setLoading(false)
         return
       }
+      captchaRef.current.reset()
       setMessage(response.data?.message)
       setLoading(false)
       formSuccess(formEl)
@@ -122,6 +137,9 @@ export default function ContactUs({ countryList }) {
                   placeholder="Description"
                 />
               </div>
+              <div className="col-md-12 form-group pb-2">
+                <ReCAPTCHA sitekey={GoogleCaptchaSiteKey} ref={captchaRef} />
+              </div>
               <div className="col-12">
                 <button type="submit" disabled={loading} className="btn btn-primary">
                   Submit{' '}
@@ -135,7 +153,7 @@ export default function ContactUs({ countryList }) {
             id="toastPlacement"
           >
             <div className="toast" id="message-toaster" ref={toastRef}>
-              <div className="toast-body bg-success text-white">
+              <div className={`${errorToast ? 'bg-danger' : 'bg-success'} toast-body text-white`}>
                 <span>
                   <i className="fa fa-check-circle" /> {message}{' '}
                 </span>
