@@ -10,8 +10,6 @@ export async function getStaticProps() {
 }
 
 export default function ContactUs({ countryList }) {
-  const GoogleCaptchaSiteKey = '6LfbhUUlAAAAAAJMZgB-d7JA6nepX_0Y6-K7MuHb'
-  const GoogleCaptchaSecretKey = '6LfbhUUlAAAAAIHawqacB0hdQmtZdeDdUuvlWaU2'
   const captchaRef = useRef(null)
   const toastRef = useRef()
   const [message, setMessage] = useState('')
@@ -138,7 +136,7 @@ export default function ContactUs({ countryList }) {
                 />
               </div>
               <div className="col-md-12 form-group pb-2">
-                <ReCAPTCHA sitekey={GoogleCaptchaSiteKey} ref={captchaRef} />
+                <ReCAPTCHA sitekey={process.env.NEXT_PUBLIC_GOOGLE_SITE_KEY} ref={captchaRef} />
               </div>
               <div className="col-12">
                 <button type="submit" disabled={loading} className="btn btn-primary">
